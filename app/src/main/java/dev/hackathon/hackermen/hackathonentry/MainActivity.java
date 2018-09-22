@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kwabenaberko.openweathermaplib.Units;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private OpenWeatherMapHelper helper;
     private DrawerLayout drawer;
-
+    private String locationString;
 
 
     @Override
@@ -38,18 +39,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.setUnits(Units.IMPERIAL);
         ////////////////////////////////////////
 
-        setWeatherData("Fayetteville", (TextView)findViewById(R.id.textView13));
-
-
-
-        setTemperatureData("Fayetteville", (TextView)findViewById(R.id.textView12));
-        setTemperatureData("Fayetteville", (TextView)findViewById(R.id.textView5));
-        setHumidityData("Fayetteville", (TextView)findViewById(R.id.textView7));
-        setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8));
-        setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9));
-        setWindData("Fayetteville", (TextView)findViewById(R.id.textView11));
+        setTempAverage(locationString);
+        setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
+        setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
+        setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
+        setHumidityData(locationString, (TextView)findViewById(R.id.textView7));
+        setTempMax(locationString, (TextView)findViewById(R.id.textView8));
+        setTempMin(locationString, (TextView)findViewById(R.id.textView9));
+        setWindData(locationString, (TextView)findViewById(R.id.textView11));
         //setLocationData("Fayetteville", (TextView)findViewById(R.id.textView10));
-        setPrecipitationData("Fayetteville", (TextView)findViewById(R.id.textView10));
+        setPrecipitationData(locationString, (TextView)findViewById(R.id.textView10));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -189,6 +188,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return weatherData[0];
     }
 
+    protected void setTempAverage(String location) {
+        final int[] weatherData = new int[1];
+        helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
+            @Override
+            public void onSuccess(CurrentWeather currentWeather) {
+                weatherData[0] = (int) ((currentWeather.getMain().getTempMin() + currentWeather.getMain().getTempMax())/2);
+                int averageTemp = weatherData[0];
+                ImageView imageView = (ImageView) findViewById(R.id.imageView2);
+                if(averageTemp < 33) {
+                    imageView.setImageResource(R.drawable.outfit0);
+                } else if(averageTemp < 50) {
+                    imageView.setImageResource(R.drawable.outfit1);
+                } else if(averageTemp < 60) {
+                    imageView.setImageResource(R.drawable.outfit4);
+                } else if(averageTemp < 75) {
+                    imageView.setImageResource(R.drawable.outfit3);
+                } else if(averageTemp < 85) {
+                    imageView.setImageResource(R.drawable.outfit5);
+                } else if(averageTemp < 95) {
+                    imageView.setImageResource(R.drawable.outfit7);
+                } else {
+                    imageView.setImageResource(R.drawable.outfit4);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.i("TAG", throwable.getMessage());
+            }
+        });
+    }
+
     protected String setWindData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
@@ -240,8 +271,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public int Calculate() {
-        double tempMax = Double.parseDouble(setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8)));
-        double tempMin = Double.parseDouble(setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9)));
+        double tempMax = Double.parseDouble(setTempMax(locationString, (TextView)findViewById(R.id.textView8)));
+        double tempMin = Double.parseDouble(setTempMin(locationString, (TextView)findViewById(R.id.textView9)));
         double averageTemp = (tempMax - tempMin) + tempMin;
         if(averageTemp < 33) {
             return 0;

@@ -3,6 +3,7 @@ package dev.hackathon.hackermen.hackathonentry;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.kwabenaberko.openweathermaplib.Units;
@@ -22,9 +24,16 @@ import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Starter settings
+    private String location;
+    private int barOne;
+    private int barTwo;
+
     private OpenWeatherMapHelper helper;
     private DrawerLayout drawer;
     private String locationString = "Fayetteville";
+
+
 
     private int tempMin;
     private final int[] tempMax = new int[1];
@@ -95,6 +104,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
 
+    }
+
+    public void onClick(View view){
+        TextInputLayout tpl = (TextInputLayout)findViewById(R.id.textInputLayout);
+        String location = tpl.getEditText().toString();
+        this.location = location;
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

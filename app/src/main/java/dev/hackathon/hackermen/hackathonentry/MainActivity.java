@@ -13,10 +13,19 @@ import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 
 public class MainActivity extends AppCompatActivity{
 
+    private OpenWeatherMapHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /////////////// API Setup ////////////////
+        helper = new OpenWeatherMapHelper();
+        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
+        helper.setUnits(Units.IMPERIAL);
+        ////////////////////////////////////////
+
         setWeatherData("Fayetteville", (TextView)findViewById(R.id.textView13));
         setTemperatureData("Fayetteville", (TextView)findViewById(R.id.textView12));
         setHumidityData("Fayetteville", (TextView)findViewById(R.id.textView7));
@@ -38,19 +47,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setWeatherData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
                 //weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
                 setTextOfView(weatherData[0], textView);
@@ -66,19 +65,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setTemperatureData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = Long.toString(Math.round(currentWeather.getMain().getTemp()));
                 setTextOfView(weatherData[0], textView);
             }
@@ -93,19 +82,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setHumidityData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = Double.toString(currentWeather.getMain().getHumidity());
                 setTextOfView(weatherData[0], textView);
             }
@@ -120,19 +99,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setTempMax(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = Double.toString(currentWeather.getMain().getTempMax());
                 setTextOfView(weatherData[0], textView);
             }
@@ -147,19 +116,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setTempMin(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = Double.toString(currentWeather.getMain().getTempMin());
                 setTextOfView(weatherData[0], textView);
             }
@@ -174,19 +133,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setWindData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = Double.toString(currentWeather.getWind().getSpeed());
                 setTextOfView(weatherData[0], textView);
             }
@@ -201,19 +150,9 @@ public class MainActivity extends AppCompatActivity{
 
     protected void setLocationData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
-        OpenWeatherMapHelper helper = new OpenWeatherMapHelper();
-        helper.setApiKey("8a76952c62d2687b3d5292d54d153fc7");
-        helper.setUnits(Units.IMPERIAL);
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                Log.i("TAG",
-                        "Coordinates: " + currentWeather.getCoord().getLat() + ", "+currentWeather.getCoord().getLon()+"\n"
-                                +"Weather Description: " + currentWeather.getWeatherArray().get(0).getDescription() + "\n"
-                                +"Max Temperature: " + currentWeather.getMain().getTempMax()+"\n"
-                                +"Wind Speed: " + currentWeather.getWind().getSpeed() + "\n"
-                                +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
-                );
                 weatherData[0] = currentWeather.getName();
                 setTextOfView(weatherData[0], textView);
             }

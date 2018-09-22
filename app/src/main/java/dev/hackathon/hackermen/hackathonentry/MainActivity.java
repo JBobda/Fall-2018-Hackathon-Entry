@@ -3,7 +3,6 @@ package dev.hackathon.hackermen.hackathonentry;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.kwabenaberko.openweathermaplib.Units;
@@ -24,14 +22,13 @@ import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //Starter settings
-    private String location;
-    private int barOne;
-    private int barTwo;
-
     private OpenWeatherMapHelper helper;
     private DrawerLayout drawer;
     private String locationString = "Fayetteville";
+
+    private int tempMin;
+    private final int[] tempMax = new int[1];
+    private String weatherDescription;
 
 
     @Override
@@ -48,14 +45,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getAverageTemp(locationString);
         setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
-        setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
+        //setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
         setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
         setHumidityData(locationString, (TextView)findViewById(R.id.textView7));
-        setTempMax(locationString, (TextView)findViewById(R.id.textView8));
-        setTempMin(locationString, (TextView)findViewById(R.id.textView9));
-        setWindData(locationString, (TextView)findViewById(R.id.textView11));
-        //setLocationData("Fayetteville", (TextView)findViewById(R.id.textView10));
-        setPrecipitationData(locationString, (TextView)findViewById(R.id.textView10));
+        //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
+        //setTempMin(locationString, (TextView)findViewById(R.id.textView9));
+        //setWindData(locationString, (TextView)findViewById(R.id.textView11));
+        //setLocationData(locationString, (TextView)findViewById(R.id.textView122222));
+        setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -98,16 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
 
-    }
-
-    public void onClick(View view){
-        TextInputLayout tpl = (TextInputLayout)findViewById(R.id.textInputLayout);
-        String location = tpl.getEditText().toString();
-        this.location = location;
-        this.location = locationString;
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
 
@@ -160,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "humidity data: "+Double.toString(currentWeather.getMain().getHumidity());
+                weatherData[0] = "Humidity "+Integer.toString((int)(currentWeather.getMain().getHumidity()))+"%";
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -177,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "maxtemp: "+Double.toString(currentWeather.getMain().getTempMax());
+                weatherData[0] = "max temp:"+Double.toString(currentWeather.getMain().getTempMax());
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -206,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return weatherData[0];
     }
 
-
     protected int getAverageTemp(String location) {
         final int[] averageTempArray = new int[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
@@ -214,22 +200,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onSuccess(CurrentWeather currentWeather) {
                 averageTempArray[0] = (int) ((currentWeather.getMain().getTempMax() + currentWeather.getMain().getTempMin()) / 2);
                 ImageView image = (ImageView) findViewById(R.id.imageView2);
+                String[] misc = new String[] {"Beanie", "No misc.", "No misc.", "No misc.", "No misc.", "Sunglasses", "Sunglasses", "No misc."};
+                String[] jacket = new String[] {"Heavy Coat", "Hoodie", "No Jacket", "No Jacket", "No Jacket", "No Jacket", "No Jacket", "Raincoat"};
+                String[] shirt = new String[] {"Long-sleeve", "Long-sleeve", "Long-sleeve", "T-shirt", "T-shirt", "T-shirt", "Tanktop", "T-shirt"};
+                String[] pants = new String[] {"Winter Pants", "Blue Jeans", "Blue Jeans", "Khakis", "Shorts", "Shorts", "Shorts", "Shorts"};
                 int averageTemp = averageTempArray[0];
-                if(averageTemp < 33) {
+                if(currentWeather.getWeatherArray().get(0).getDescription().contains("rain")) {
+                    setTextOfView(misc[7], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[7], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[7], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[7], (TextView) findViewById(R.id.textView9));
+                    image.setImageResource(R.drawable.outfit8);
+                } else if(averageTemp < 33) {
+                    setTextOfView(misc[0], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[0], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[0], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[0], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit0);
                 } else if(averageTemp < 50) {
+                    setTextOfView(misc[1], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[1], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[1], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[1], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit1);
                 } else if(averageTemp < 60) {
+                    setTextOfView(misc[2], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[2], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[2], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[2], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit2);
                 } else if(averageTemp < 75) {
+                    setTextOfView(misc[3], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[3], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[3], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[3], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit4);
                 } else if(averageTemp < 85) {
+                    setTextOfView(misc[4], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[4], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[4], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[4], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit3);
                 } else if(averageTemp < 95) {
+                    setTextOfView(misc[5], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[5], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[5], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[5], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit5);
                 } else if(averageTemp >= 95) {
+                    setTextOfView(misc[6], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[6], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[6], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[6], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit7);
                 } else {
+                    setTextOfView(misc[3], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[3], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[3], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[3], (TextView) findViewById(R.id.textView9));
                     image.setImageResource(R.drawable.outfit4);
                 }
             }
@@ -280,7 +308,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "precip: "+currentWeather.getWeatherArray().get(0).getDescription();
+                boolean isRaining = false;
+                if(currentWeather.getWeatherArray().get(0).getDescription().contains("rain")) {
+                    isRaining = true;
+                }
+                weatherData[0] = "precip: "+isRaining;
                 setTextOfView(weatherData[0], textView);
             }
             @Override
@@ -307,11 +339,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setTextOfView(String input, TextView textView) {
         textView.setText(input);
-    }
-
-    public void setTextOfView(int input, TextView textView){
-        String stringInput = Integer.toString(input);
-        textView.setText(stringInput);
     }
 
 }

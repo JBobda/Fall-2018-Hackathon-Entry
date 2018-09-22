@@ -17,10 +17,10 @@
         android:layout_marginStart="8dp"
 
         android:layout_marginTop="2dp"
-        android:fontFamily="@font/Helvetica"
+        android:fontFamily="@font/helvetica"
         android:text="@string/sample_question"
         android:textColor="#07F"
-        android:textSize="16"
+        android:textSize="3mm"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"

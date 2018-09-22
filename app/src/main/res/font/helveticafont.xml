@@ -4,9 +4,9 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/Helvetica"
+        android:font="@font/helvetica"
         app:fontStyle="normal"
         app:fontWeight="400"
-        app:font="@font/Helvetica"
+        app:font="@font/helvetica"
         />
 </font-family>

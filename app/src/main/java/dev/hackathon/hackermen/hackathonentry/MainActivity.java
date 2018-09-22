@@ -24,7 +24,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private OpenWeatherMapHelper helper;
     private DrawerLayout drawer;
-    private String locationString;
+    private String locationString = "Fayetteville";
+
+    private int tempMin;
+    private final int[] tempMax = new int[1];
+    private String weatherDescription;
 
 
     @Override
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.setUnits(Units.IMPERIAL);
         ////////////////////////////////////////
 
-        setTempAverage(locationString);
+        getAverageTemp(locationString);
         setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
         setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
         setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
@@ -188,36 +192,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return weatherData[0];
     }
 
-    protected void setTempAverage(String location) {
-        final int[] weatherData = new int[1];
+    public void setGlobalTempMin(int tempMin){
+        this.tempMin = tempMin;
+    }
+
+    protected int getAverageTemp(String location) {
+        final int[] averageTempArray = new int[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = (int) ((currentWeather.getMain().getTempMin() + currentWeather.getMain().getTempMax())/2);
-                int averageTemp = weatherData[0];
-                ImageView imageView = (ImageView) findViewById(R.id.imageView2);
+                averageTempArray[0] = (int) ((currentWeather.getMain().getTempMax() + currentWeather.getMain().getTempMin()) / 2);
+                ImageView image = (ImageView) findViewById(R.id.imageView2);
+                int averageTemp = averageTempArray[0];
                 if(averageTemp < 33) {
-                    imageView.setImageResource(R.drawable.outfit0);
+                    image.setImageResource(R.drawable.outfit0);
                 } else if(averageTemp < 50) {
-                    imageView.setImageResource(R.drawable.outfit1);
+                    image.setImageResource(R.drawable.outfit1);
                 } else if(averageTemp < 60) {
-                    imageView.setImageResource(R.drawable.outfit4);
+                    image.setImageResource(R.drawable.outfit2);
                 } else if(averageTemp < 75) {
-                    imageView.setImageResource(R.drawable.outfit3);
+                    image.setImageResource(R.drawable.outfit4);
                 } else if(averageTemp < 85) {
-                    imageView.setImageResource(R.drawable.outfit5);
+                    image.setImageResource(R.drawable.outfit3);
                 } else if(averageTemp < 95) {
-                    imageView.setImageResource(R.drawable.outfit7);
+                    image.setImageResource(R.drawable.outfit5);
+                } else if(averageTemp >= 95) {
+                    image.setImageResource(R.drawable.outfit7);
                 } else {
-                    imageView.setImageResource(R.drawable.outfit4);
+                    image.setImageResource(R.drawable.outfit4);
                 }
             }
-
             @Override
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
         });
+        return averageTempArray[0];
     }
 
     protected String setWindData(String location, final TextView textView) {
@@ -286,6 +296,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setTextOfView(String input, TextView textView) {
         textView.setText(input);
+    }
+
+    public void setTextOfView(int input, TextView textView){
+        String stringInput = Integer.toString(input);
+        textView.setText(stringInput);
     }
 
 }

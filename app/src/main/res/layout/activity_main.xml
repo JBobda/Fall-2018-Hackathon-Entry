@@ -68,6 +68,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        android:src="@drawable/outfit0"
         android:layout_width="140dp"
         android:layout_height="358dp"
         android:layout_marginBottom="8dp"
@@ -82,7 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@color/colorAccent"
         android:contentDescription="TODO" />
 
     <TextView

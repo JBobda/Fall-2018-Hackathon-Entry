@@ -17,7 +17,7 @@
 
         android:text="@string/sample_question"
         android:textColor="#07F"
-        android:textSize="16"
+        android:textSize="16dp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"

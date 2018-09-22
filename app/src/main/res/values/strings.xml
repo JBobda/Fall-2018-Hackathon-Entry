@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HackathonEntry</string>
+    <string name="sample_question">Sample Question?</string>
 </resources>

@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ////////////////////////////////////////
 
         setWeatherData("Fayetteville", (TextView)findViewById(R.id.textView13));
+
+
+
         setTemperatureData("Fayetteville", (TextView)findViewById(R.id.textView12));
+        setTemperatureData("Fayetteville", (TextView)findViewById(R.id.textView5));
         setHumidityData("Fayetteville", (TextView)findViewById(R.id.textView7));
         setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8));
         setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9));
@@ -122,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "temperature data "+Long.toString(Math.round(currentWeather.getMain().getTemp()));
+                weatherData[0] = Long.toString(Math.round(currentWeather.getMain().getTemp())) + "°";
                 setTextOfView(weatherData[0], textView);
             }
 

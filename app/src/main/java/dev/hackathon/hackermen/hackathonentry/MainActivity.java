@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getAverageTemp(locationString);
         setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
         //setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
-        //setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
+        setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
         setHumidityData(locationString, (TextView)findViewById(R.id.textView7));
         //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
         //setTempMin(locationString, (TextView)findViewById(R.id.textView9));

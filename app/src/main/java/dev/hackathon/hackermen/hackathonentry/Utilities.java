@@ -11,6 +11,7 @@ import java.net.URLConnection;
 
 public class Utilities {
 
+
     protected void Calculate(String rootobj) {
         System.out.println(rootobj);
     }

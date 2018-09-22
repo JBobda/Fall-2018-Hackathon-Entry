@@ -34,12 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String locationString = "Fayetteville";
 
 
-
-    private int tempMin;
-    private final int[] tempMax = new int[1];
-    private String weatherDescription;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextInputLayout tpl = (TextInputLayout)findViewById(R.id.textInputLayout);
         String location = tpl.getEditText().toString();
         this.location = location;
+        this.location = locationString;
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -211,9 +206,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return weatherData[0];
     }
 
-    public void setGlobalTempMin(int tempMin){
-        this.tempMin = tempMin;
-    }
 
     protected int getAverageTemp(String location) {
         final int[] averageTempArray = new int[1];

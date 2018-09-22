@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
         //setTempMin(locationString, (TextView)findViewById(R.id.textView9));
         //setWindData(locationString, (TextView)findViewById(R.id.textView11));
-        setLocationData(locationString, (TextView)findViewById(R.id.textView12));
-        //setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
+        //setLocationData(locationString, (TextView)findViewById(R.id.textView122222));
+        setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -205,7 +205,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String[] shirt = new String[] {"Long-sleeve", "Long-sleeve", "Long-sleeve", "T-shirt", "T-shirt", "T-shirt", "Tanktop", "T-shirt"};
                 String[] pants = new String[] {"Winter Pants", "Blue Jeans", "Blue Jeans", "Khakis", "Shorts", "Shorts", "Shorts", "Shorts"};
                 int averageTemp = averageTempArray[0];
-                if(averageTemp < 33) {
+                if(currentWeather.getWeatherArray().get(0).getDescription().contains("rain")) {
+                    setTextOfView(misc[7], (TextView) findViewById(R.id.textView11));
+                    setTextOfView(jacket[7], (TextView) findViewById(R.id.textView10));
+                    setTextOfView(shirt[7], (TextView) findViewById(R.id.textView8));
+                    setTextOfView(pants[7], (TextView) findViewById(R.id.textView9));
+                    image.setImageResource(R.drawable.outfit8);
+                } else if(averageTemp < 33) {
                     setTextOfView(misc[0], (TextView) findViewById(R.id.textView11));
                     setTextOfView(jacket[0], (TextView) findViewById(R.id.textView10));
                     setTextOfView(shirt[0], (TextView) findViewById(R.id.textView8));
@@ -302,7 +308,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "precip: "+currentWeather.getWeatherArray().get(0).getDescription();
+                boolean isRaining = false;
+                if(currentWeather.getWeatherArray().get(0).getDescription().contains("rain")) {
+                    isRaining = true;
+                }
+                weatherData[0] = "precip: "+isRaining;
                 setTextOfView(weatherData[0], textView);
             }
             @Override

@@ -1,38 +1,20 @@
 package dev.hackathon.hackermen.hackathonentry;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.TextView;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
+import com.kwabenaberko.openweathermaplib.Units;
+import com.kwabenaberko.openweathermaplib.implementation.OpenWeatherMapHelper;
+import com.kwabenaberko.openweathermaplib.models.currentweather.CurrentWeather;
 
-public class Utilities {
+public class Utilities{
 
+    String[] weatherData = new String[] {"geezzzz"};
 
-    protected void Calculate(String rootobj) {
-        System.out.println(rootobj);
+    protected static void Calculate(String weatherCondition){
+
     }
-
-    protected void APICalls() {
-        String locationName = "fayetteville";
-        String sURL = "http://api.openweathermap.org/data/2.5/weather?APPID=8a76952c62d2687b3d5292d54d153fc7&q="+locationName;
-        try {
-            URL url = new URL(sURL);
-            URLConnection request = url.openConnection();
-            request.connect();
-            JsonParser jp = new JsonParser();
-            JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-            JsonObject rootobj = root.getAsJsonObject();
-            String temp = rootobj.get("").getAsString();
-        } catch(Exception e) {
-            System.out.println("f " + e);
-        }
-    }
-
-
 
 
 }

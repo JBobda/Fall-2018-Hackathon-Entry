@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
 
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/helvetica"
         android:text="@string/sample_question"
         android:textColor="#07F"
         android:textSize="3mm"

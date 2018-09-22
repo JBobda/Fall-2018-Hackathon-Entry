@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity{
         setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8));
         setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9));
         setWindData("Fayetteville", (TextView)findViewById(R.id.textView11));
-        setLocationData("Fayetteville", (TextView)findViewById(R.id.textView10));
+        //setLocationData("Fayetteville", (TextView)findViewById(R.id.textView10));
+        setPrecipitationData("Fayetteville", (TextView)findViewById(R.id.textView10));
+
     }
 
     public void openSettings(View view){
@@ -45,30 +47,28 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    protected void setWeatherData(String location, final TextView textView) {
+    protected String setWeatherData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
                 weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
-                //weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
                 setTextOfView(weatherData[0], textView);
             }
-
             @Override
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setTemperatureData(String location, final TextView textView) {
+    protected String setTemperatureData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = Long.toString(Math.round(currentWeather.getMain().getTemp()));
+                weatherData[0] = "temperature data "+Long.toString(Math.round(currentWeather.getMain().getTemp()));
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -76,16 +76,16 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setHumidityData(String location, final TextView textView) {
+    protected String setHumidityData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = Double.toString(currentWeather.getMain().getHumidity());
+                weatherData[0] = "humidity data: "+Double.toString(currentWeather.getMain().getHumidity());
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -93,16 +93,16 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setTempMax(String location, final TextView textView) {
+    protected String setTempMax(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = Double.toString(currentWeather.getMain().getTempMax());
+                weatherData[0] = "maxtemp: "+Double.toString(currentWeather.getMain().getTempMax());
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -110,16 +110,16 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setTempMin(String location, final TextView textView) {
+    protected String setTempMin(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = Double.toString(currentWeather.getMain().getTempMin());
+                weatherData[0] = "min temp"+Double.toString(currentWeather.getMain().getTempMin());
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -127,16 +127,16 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setWindData(String location, final TextView textView) {
+    protected String setWindData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = Double.toString(currentWeather.getWind().getSpeed());
+                weatherData[0] = "winddata"+Double.toString(currentWeather.getWind().getSpeed())+" "+Double.toString(currentWeather.getWind().getDeg());
                 setTextOfView(weatherData[0], textView);
             }
 
@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
-    protected void setLocationData(String location, final TextView textView) {
+    protected String setLocationData(String location, final TextView textView) {
         final String[] weatherData = new String[1];
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
@@ -161,10 +161,39 @@ public class MainActivity extends AppCompatActivity{
             public void onFailure(Throwable throwable) {
                 Log.i("TAG", throwable.getMessage());
             }
-
         });
+        return weatherData[0];
     }
 
+    protected String setPrecipitationData(String location, final TextView textView) {
+        final String[] weatherData = new String[1];
+        helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
+            @Override
+            public void onSuccess(CurrentWeather currentWeather) {
+                weatherData[0] = "precip: "+currentWeather.getWeatherArray().get(0).getDescription();
+                setTextOfView(weatherData[0], textView);
+            }
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.i("TAG", throwable.getMessage());
+            }
+        });
+        return weatherData[0];
+    }
+
+    public int Calculate() {
+        double tempMax = Double.parseDouble(setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8)));
+        double tempMin = Double.parseDouble(setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9)));
+        double averageTemp = (tempMax - tempMin) + tempMin;
+        if(averageTemp < 33) {
+            return 0;
+        } else if(averageTemp < 50) {
+            return 1;
+        } else if(averageTemp < 60) {
+            return 2;
+        }
+        return 0;
+    }
 
     public void setTextOfView(String input, TextView textView) {
         textView.setText(input);

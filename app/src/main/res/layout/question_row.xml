@@ -7,52 +7,60 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="304dp"
-        android:layout_height="19dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-
-        android:text="@string/sample_question"
-        android:textColor="#07F"
-        android:textSize="16"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="320dp"
-        android:layout_height="41dp"
+        android:layout_width="250dp"
+        android:layout_height="21dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
+
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/Helvetica"
+        android:text="@string/sample_question"
+        android:textColor="#07F"
+        android:textSize="16"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="256dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
         android:max="100"
         android:progress="50"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="444dp"
-        android:layout_marginEnd="312dp"
-        android:layout_marginRight="312dp"
+        android:layout_marginBottom="416dp"
+        android:layout_marginEnd="240dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="240dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 </android.support.constraint.ConstraintLayout>

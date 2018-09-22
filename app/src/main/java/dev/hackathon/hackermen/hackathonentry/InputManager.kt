@@ -23,8 +23,6 @@ class InputManager : AppCompatActivity(){
         // set on-click listener
         button.setOnClickListener {
             // your code to perform when the user clicks on the button
-            barOne = seekBar.progress;
-            barTwo = seekBar.progress;
             location = textInputLayout.editText.toString();
 
 

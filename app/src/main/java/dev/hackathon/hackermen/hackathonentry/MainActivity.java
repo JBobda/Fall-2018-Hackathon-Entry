@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.getCurrentWeatherByCityName(location, new OpenWeatherMapHelper.CurrentWeatherCallback() {
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
-                weatherData[0] = "maxtemp: "+Double.toString(currentWeather.getMain().getTempMax());
+                weatherData[0] = "max temp:"+Double.toString(currentWeather.getMain().getTempMax());
                 setTextOfView(weatherData[0], textView);
             }
 

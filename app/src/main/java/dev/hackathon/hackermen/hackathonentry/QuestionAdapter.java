@@ -2,11 +2,9 @@ package dev.hackathon.hackermen.hackathonentry;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
     private String[] mDataset;
@@ -16,10 +14,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public View mView;
-        public MyViewHolder(View v) {
+        public TextView mTextView;
+        public MyViewHolder(TextView v) {
             super(v);
-            mView = v;
+            mTextView = v;
         }
     }
 
@@ -32,7 +30,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     @Override
     public QuestionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view based off of the layout file from Eli
-        View v =  LayoutInflater.from(parent.getContext()).inflate(R.layout.question_row, parent, false);
+        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.question_row, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -42,7 +40,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
+        holder.mTextView.setText(mDataset[position]);
+        holder.
 
     }
 

@@ -28,7 +28,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         String[] names = { "Jan", "Eli", "Luke", "Garrett"};
-        mAdapter = new QuestionAdapter(names);
+        //mAdapter = new QuestionAdapter(names);
         mRecyclerView.setAdapter(mAdapter);
     }
 

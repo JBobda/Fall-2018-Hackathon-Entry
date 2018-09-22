@@ -1,8 +1,10 @@
 package dev.hackathon.hackermen.hackathonentry;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.kwabenaberko.openweathermaplib.Units;
@@ -20,8 +22,18 @@ public class MainActivity extends AppCompatActivity{
         setHumidityData("Fayetteville", (TextView)findViewById(R.id.textView7));
         setTempMax("Fayetteville", (TextView)findViewById(R.id.textView8));
         setTempMin("Fayetteville", (TextView)findViewById(R.id.textView9));
-        setWindData("Fayetteville", (TextView)findViewById(R.id.textView10));
-        setLocationData("Fayetteville", (TextView)findViewById(R.id.textView11));
+        setWindData("Fayetteville", (TextView)findViewById(R.id.textView11));
+        setLocationData("Fayetteville", (TextView)findViewById(R.id.textView10));
+    }
+
+    public void openSettings(View view){
+        Intent intent = new Intent(this, QuestionActivity.class);
+        startActivity(intent);
+    }
+
+    public void openNavigator(View view){
+        Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
     }
 
     protected void setWeatherData(String location, final TextView textView) {
@@ -40,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
                                 +"City, Country: " + currentWeather.getName() + ", " + currentWeather.getSys().getCountry()
                 );
                 weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
+                //weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
                 setTextOfView(weatherData[0], textView);
             }
 

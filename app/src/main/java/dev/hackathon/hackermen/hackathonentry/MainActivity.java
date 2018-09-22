@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onSuccess(CurrentWeather currentWeather) {
                 weatherData[0] = currentWeather.getWeatherArray().get(0).getDescription();
+                String dataID = currentWeather.getId().toString();
                 setTextOfView(weatherData[0], textView);
             }
             @Override

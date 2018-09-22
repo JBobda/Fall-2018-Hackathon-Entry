@@ -6,20 +6,21 @@
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/AlertDialog.AppCompat.Light"
-    android:background="@color/colorAccent"
+    android:background="#CFD8DC"
     >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        />
+        android:layout_width="260dp"
+        android:layout_height="105dp"
+        android:src="@drawable/partlycloudy" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Weather"
+        android:text="Hackathon Weather"
+        android:fontFamily="@font/helvetica"
+        android:textSize="16dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         />
 

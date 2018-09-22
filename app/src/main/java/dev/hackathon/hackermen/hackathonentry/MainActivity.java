@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
         //setTempMin(locationString, (TextView)findViewById(R.id.textView9));
         //setWindData(locationString, (TextView)findViewById(R.id.textView11));
-        //setLocationData(locationString, (TextView)findViewById(R.id.textView122222));
-        setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
+        setLocationData(locationString, (TextView)findViewById(R.id.textView12));
+        //setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

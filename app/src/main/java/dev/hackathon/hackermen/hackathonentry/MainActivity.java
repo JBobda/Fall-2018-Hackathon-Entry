@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void onClick(View view){}
 
     public void openSettings(View view){
         Intent intent = new Intent(this, QuestionActivity.class);

@@ -31,10 +31,10 @@ Open project in Android studio, and then run it.
 
 ## Authors
 
-* **Eli Helf**
-* **Luke Faupel**
-* **Jan Bobda**
-* **Garrett Whitehead**
+* [**Eli Helf**](https://github.com/eahelf)
+* [**Luke Faupel**](https://github.com/faups)
+* [**Jan Bobda**](https://github.com/JBobda)
+* [**Garrett Whitehead**](https://github.com/gwhiteheadfayar)
 
 ## License
 

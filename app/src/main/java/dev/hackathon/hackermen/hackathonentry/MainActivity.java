@@ -3,6 +3,7 @@ package dev.hackathon.hackermen.hackathonentry;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private OpenWeatherMapHelper helper;
     private DrawerLayout drawer;
-    private String locationString = "Fayetteville";
+    private String locationString = Container.locationString;
 
     private int tempMin;
     private final int[] tempMax = new int[1];
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //locationString = Container.locationString;
 
         /////////////// API Setup ////////////////
         helper = new OpenWeatherMapHelper();
@@ -43,15 +44,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         helper.setUnits(Units.IMPERIAL);
         ////////////////////////////////////////
 
-        getAverageTemp(locationString);
-        setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
+        getAverageTemp(Container.locationString);
+        setWeatherData(Container.locationString, (TextView)findViewById(R.id.textView13));
         //setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
-        setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
-        setHumidityData(locationString, (TextView)findViewById(R.id.textView7));
+        setTemperatureData(Container.locationString, (TextView)findViewById(R.id.textView5));
+        setHumidityData(Container.locationString, (TextView)findViewById(R.id.textView7));
         //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
         //setTempMin(locationString, (TextView)findViewById(R.id.textView9));
         //setWindData(locationString, (TextView)findViewById(R.id.textView11));
-        setLocationData(locationString, (TextView)findViewById(R.id.textView12));
+        setLocationData(Container.locationString, (TextView)findViewById(R.id.textView12));
         //setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,7 +98,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void onClick(View view){}
+    public void onClick(View view){
+        TextInputLayout tpl = (TextInputLayout) findViewById(R.id.textInputLayout);
+        Container.locationString = tpl.getEditText().getText().toString();
+        Log.i("LOCATION: ", Container.locationString);
+
+        /*
+        getAverageTemp(locationString);
+        setWeatherData(locationString, (TextView)findViewById(R.id.textView13));
+        //setTemperatureData(locationString, (TextView)findViewById(R.id.textView12));
+        setTemperatureData(locationString, (TextView)findViewById(R.id.textView5));
+        setHumidityData(locationString, (TextView)findViewById(R.id.textView7));
+        //setTempMax(locationString, (TextView)findViewById(R.id.textView8));
+        //setTempMin(locationString, (TextView)findViewById(R.id.textView9));
+        //setWindData(locationString, (TextView)findViewById(R.id.textView11));
+        setLocationData(locationString, (TextView)findViewById(R.id.textView12));
+        //setPrecipitationData(locationString, (TextView)findViewById(R.id.textView12));
+        */
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void openSettings(View view){
         Intent intent = new Intent(this, QuestionActivity.class);

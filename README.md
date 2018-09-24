@@ -1,5 +1,5 @@
 # Fall-2018-Hackathon-Entry
-One Paragraph of project description goes here
+This was a project for the Fall 2018 ACM Hackathon. We had 24 hours to create a project that related to the theme of "New and Emerging Technologies" and we created an android application that integrates the rising Kotlin programming language. This android application uses the OpenWeatherMap API and utilizes it to recommend clothing for the user to wear.
 
 ## Getting Started
 
@@ -16,8 +16,6 @@ Android Studio 3.1.4 or greater
 ```
 
 ### Installing
-
-How to get a development env running
 
 Clone the repository from GitHub
 

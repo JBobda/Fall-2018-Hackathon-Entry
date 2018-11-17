@@ -1,5 +1,5 @@
 # Fall-2018-Hackathon-Entry
-This android application uses the OpenWeatherMap API to recommend clothing for the user to wear. The app also displays more detailed descrition of the weather as well as a handrawn model of what the user should wear. This was a project for the Fall 2018 ACM Hackathon. We had 24 hours to create a project that related to the theme of "New and Emerging Technologies" and we created an android application that integrates the rising Kotlin programming language.
+This android application uses the OpenWeatherMap API to recommend clothing for the user to wear. The app also displays more detailed descrition of the weather as well as a handrawn model of what the user should wear. This was a project for the Fall 2018 ACM-J.B.Hunt Hackathon. We had 24 hours to create a project that related to the theme of "New and Emerging Technologies" and we created an android application that integrates the rising Kotlin programming language.
 
 ## Getting Started
 
